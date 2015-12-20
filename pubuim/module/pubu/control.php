@@ -39,7 +39,9 @@ class pubu extends control
         $pubuConfig = $this->pubu->getConfig();
         $this->view->position[] = html::a(inlink('index'), $this->lang->pubu->common);
         $this->view->position[] = '测试';
-        $this->view->ping = $this->pubu->sendNotification($pubuConfig->webhook, array('type' => 'ping'));
+        $this->view->ping = $this->pubu->sendNotification($pubuConfig->webhook,
+            array('type' => 'ping',
+                  "data" => array("hello"=>"zentao")));
         $this->display();
     }
 }
