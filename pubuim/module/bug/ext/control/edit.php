@@ -11,9 +11,9 @@ class myBug extends bug
         if (!empty($_POST) and !isset($_POST['stepIDList']) && $pubuConfig->webhook) {
             $this->loadModel('pubu')->sendNotification($pubuConfig->webhook,
                 array("type"    => "BUG.EDIT",
-                      "bug"     => $this->bug,
-                      "user"    => $this->user,
-                      "product" => $this->product));
+                      "operator" => $this->app->user->account,
+                      "data"     => $_POST,
+                ));
 
         }
         parent::edit();

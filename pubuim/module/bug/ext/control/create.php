@@ -10,10 +10,10 @@ class myBug extends bug
         //todo if create send notification to pubuim
         if (!empty($_POST) and !isset($_POST['stepIDList']) && $pubuConfig->webhook) {
             $this->loadModel('pubu')->sendNotification($pubuConfig->webhook,
-                array("type"    => "BUG.CREATE",
-                      "bug"     => $this->bug,
-                      "user"    => $this->user,
-                      "product" => $this->product));
+                array("type"     => "BUG.CREATE",
+                      "operator" => $this->app->user->account,
+                      "data"     => $_POST,
+                     ));
 
         }
         parent::create();

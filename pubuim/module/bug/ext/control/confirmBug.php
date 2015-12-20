@@ -10,11 +10,12 @@ class myBug extends bug
         if (!empty($_POST) && $pubuConfig->webhook) {
             $this->loadModel('pubu')->sendNotification($pubuConfig->webhook,
                 array("type"    => "BUG.CONFIRMBUG",
-                      "bug"     => $this->bug,
-                      "user"    => $this->user,
-                      "product" => $this->product));
+                      "operator" => $this->app->user->account,
+                      "data"     => $_POST,
+                ));
 
         }
+        var_dump($this);
         parent::confirmBug();
     }
 }
