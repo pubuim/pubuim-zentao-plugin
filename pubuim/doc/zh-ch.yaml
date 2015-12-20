@@ -1,0 +1,23 @@
+---
+name: PubuIM
+code: PubuIM
+type: extension
+copyright: PubuIM
+site: https://pubu.im
+author: 'PubuIM(hello@pubu.im)'
+abstract: PubuIM 通知插件
+desc: PubuIM
+install: |
+  1. Install through the buildin extension manager.
+    1.1 install kevincom plugin
+    1.2 install this plugin
+release:
+  1.0:
+    charge: PubuIM
+    license: LGPL
+    date: 2015-12-20
+    zentao:
+      compatible: all
+      incompatible:
+    conflicts: null
+
