@@ -1,7 +1,7 @@
 FROM ubuntu:14.04
 RUN cd /opt
 #RUN apt-get install wget -y
-#RUN wget http://dl.cnezsoft.com/zentao/pro5.0/ZenTaoPMS.Pro5.0.stable.zbox_64.tar.gz
+RUN wget http://dl.cnezsoft.com/zentao/pro5.0/ZenTaoPMS.Pro5.0.stable.zbox_64.tar.gz
 #ADD README.md /opt/READEME.md
 #ADD ZenTaoPMS.Pro5.0.stable.zbox_64.tar.gz /opt/
 
