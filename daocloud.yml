@@ -1,0 +1,4 @@
+image: daocloud/ci-golang:1.4
+
+script:
+    - echo $MYENV
