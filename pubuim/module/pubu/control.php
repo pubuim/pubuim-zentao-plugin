@@ -24,14 +24,21 @@ class pubu extends control
             $pubuConfig->webhook = trim($this->post->webhook);
 
             $this->loadModel('setting')->setItems('system.pubu', $pubuConfig);
-            if (dao::isError()) die(js::error(dao::getError()));
+            if (dao::isError()) {
+                var_dump(dao::getError());
+                error_log("DaoError: " . dao::getError() . "\n", 3, "/tmp/zentao.log");
+                $this->pubu->sendNotification($pubuConfig->webhook,
+                    array('type' => 'error',
+                          'data' => array('error' => dao::getError())));
+                // die(js::error(dao::getError()));
+            }
 
             $this->session->set('pubuConfig', '');
 
-            $this->view->position[] = html::a(inlink('index'), $this->lang->pubu->common);
-            $this->view->position[] = '保存';
-            $this->display();
         }
+        $this->view->position[] = html::a(inlink('index'), $this->lang->pubu->common);
+        $this->view->position[] = '保存';
+        $this->display();
     }
 
     public function test()
@@ -39,9 +46,15 @@ class pubu extends control
         $pubuConfig = $this->pubu->getConfig();
         $this->view->position[] = html::a(inlink('index'), $this->lang->pubu->common);
         $this->view->position[] = '测试';
-        $this->view->ping = $this->pubu->sendNotification($pubuConfig->webhook,
+        $ping = $this->pubu->sendNotification($pubuConfig->webhook,
             array('type' => 'ping',
-                  "data" => array("hello"=>"zentao")));
+                  "data" => array("hello" => "zentao")));
+
+        $this->view->ping = $ping;
+        if(is_string($ping)){
+            echo js::alert($ping);
+            die(js::locate('back'));
+        }
         $this->display();
     }
 }
